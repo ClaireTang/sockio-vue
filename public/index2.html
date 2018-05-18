@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Socket.IO Example2</title>
+  </head>
+  <body>
+	  <div id="app">
+	  	tyc测试文件<br>
+	  	{{message1.a}}-{{message1.b}}
+	  </div>
+  	
+   <!--引入必要的js文件-->
+	<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.0/socket.io.js"></script>
+	<script type="text/javascript">
+		var app = new Vue({
+			el: '#app',
+			data: {
+				socket: null,
+				message1: {},
+			},
+			created(){
+				this.initSocket()
+			},
+			methods:{
+				initSocket(){
+					//新建socket
+					this.socket = io('http://127.0.0.1:3000');
+					this.socketdata()
+				},
+				socketdata(){
+					var _this = this
+					// #定义接收到trends类型数据时的行为
+					this.socket.on('trends', function(msg){
+						// console.log(msg);
+						_this.message1 = JSON.parse(msg)
+					})
+					
+				}
+			}
+		})
+	</script>
+  </body>
+</html>

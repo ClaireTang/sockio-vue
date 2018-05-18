@@ -32,6 +32,7 @@ setInterval(function() {
     var coins = fs.readFileSync('./data/coins.json','utf-8');
     // #向所有socket连接发送数据
     for (i in iolist) {
+        console.log(i)
         // # 向客户端发送trends数据
         iolist[i].emit('trends', trends);
         // # 向客户端发送coins数据
